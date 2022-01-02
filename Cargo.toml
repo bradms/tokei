@@ -23,8 +23,7 @@ version = "12.1.2"
 
 [features]
 all = ["cbor", "yaml"]
-cbor = ["hex", "serde_cbor"]
-default = []
+cbor = ["hex", "cbor4ii"]
 yaml = ["serde_yaml"]
 
 [profile.release]
@@ -66,9 +65,10 @@ version = "0.8"
 optional = true
 version = "0.4"
 
-[dependencies.serde_cbor]
+[dependencies.cbor4ii]
 optional = true
-version = "0.11.2"
+features = ["serde1"]
+version = "0.2"
 
 [dependencies.serde_yaml]
 optional = true

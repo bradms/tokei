@@ -147,13 +147,13 @@ If you want to enable all supported serialization formats, you can use the 'all'
 
 // The ordering of these determines the attempted order when parsing.
 supported_formats!(
-    (cbor, "cbor", Cbor [serde_cbor, hex]) =>
+    (cbor, "cbor", Cbor [cbor4ii, hex]) =>
         |input| {
             hex::FromHex::from_hex(input)
                 .map_err(|e: hex::FromHexError| <Box<dyn Error>>::from(e))
-                .and_then(|hex: Vec<_>| Ok(serde_cbor::from_slice(&hex)?))
+                .and_then(|hex: Vec<_>| Ok(cbor4ii::serde::from_slice(&hex)?))
         },
-        |languages| serde_cbor::to_vec(&languages).map(hex::encode),
+        |languages| cbor4ii::serde::to_vec(Vec::new(), &languages).map(hex::encode),
 
     (json, "json", Json [serde_json]) =>
         serde_json::from_str,
